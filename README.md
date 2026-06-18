@@ -1,4 +1,5 @@
 # LLD-Project 1
+
 # Tomato - Food Delivery System (Low-Level Design)
 
 ## Overview
@@ -12,36 +13,6 @@ Tomato is a low-level design implementation of a food delivery application. It d
 - **User Profiles**: Support for different user types with cart management
 - **Pickup & Delivery**: Support for both pickup and delivery order types
 - **Notifications**: Notification service for order updates
-
-## Project Structure
-src/
-├── factories/ # Factory patterns for order creation
-│ ├── OrderFactory.java
-│ ├── NowOrderFactory.java
-│ └── ScheduledOrderFactory.java
-├── managers/ # Business logic managers
-│ ├── OrderManager.java
-│ └── RestaurantManager.java
-├── models/ # Core entities
-│ ├── Order.java
-│ ├── DeliveryOrder.java
-│ ├── PickupOrder.java
-│ ├── Restaurant.java
-│ ├── MenuItem.java
-│ ├── Cart.java
-│ └── User.java
-├── services/ # Service layer
-│ └── NotificationService.java
-├── strategies/ # Strategy pattern
-for payments
-│ ├── PaymentStrategy.java
-│ ├── CreditCardPaymentStrategy.java
-│ └── UpiPaymentStrategy.java
-├── utils/ # Utilities
-│ └── TimeUtils.java
-├── Main.java # Entry point
-└── TomatoApp.java # Application orchestrator
-
 
 ## Design Patterns Used
 - **Factory Pattern**: `OrderFactory`, `NowOrderFactory`, `ScheduledOrderFactory`
