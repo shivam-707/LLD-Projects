@@ -39,5 +39,10 @@ public class Restaurant {
     public List<MenuItem> getMenu() {
         return menu;
     }
+
+    public String getId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getId'");
+    }
 }
 
