@@ -11,7 +11,7 @@ public class OrderManager {
     private static final Logger logger = Logger.getLogger(OrderManager.class.getName());
 
     private OrderManager() {
-        // Private Constructor
+        
     }
 
     public static OrderManager getInstance() {
