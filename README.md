@@ -36,3 +36,6 @@ Factory pattern implementation
 Strategy pattern for flexible payment processing
 Separation of concerns
 Inheritance and polymorphism
+
+## Summary
+This repository implements a modular food ordering system that supports delivery and pickup workflows, multiple payment strategies, and order tracking through manager classes. Recent changes added logging for service operations and lightweight test helpers for order management.
