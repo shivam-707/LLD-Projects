@@ -31,5 +31,14 @@ public class OrderManager {
                     + " | At: " + order.getScheduled());
         }
     }
+
+    // Test helpers
+    public int getOrderCount() {
+        return orders.size();
+    }
+
+    public void clearOrders() {
+        orders.clear();
+    }
 }
 
