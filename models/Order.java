@@ -2,6 +2,7 @@ package models;
 
 import java.util.List;
 import strategies.*;
+import exceptions.*;
 
 public abstract class Order {
     private static int nextOrderId = 0;
@@ -23,13 +24,39 @@ public abstract class Order {
         this.orderId = ++nextOrderId;
     }
 
-    public boolean processPayment() {
-        if (paymentStrategy != null) {
+    /**
+     * Validates that the order has all required fields before processing.
+     * @throws InvalidOrderException if validation fails
+     */
+    public void validateOrder() throws InvalidOrderException {
+        if (user == null) {
+            throw new InvalidOrderException("Order " + orderId + ": User cannot be null");
+        }
+        if (restaurant == null) {
+            throw new InvalidOrderException("Order " + orderId + ": Restaurant cannot be null");
+        }
+        if (items == null || items.isEmpty()) {
+            throw new InvalidOrderException("Order " + orderId + ": Order must contain at least one item");
+        }
+        if (total <= 0) {
+            throw new InvalidOrderException("Order " + orderId + ": Order total must be greater than zero (total=" + total + ")");
+        }
+        if (paymentStrategy == null) {
+            throw new InvalidOrderException("Order " + orderId + ": Payment strategy is required");
+        }
+    }
+
+    public void processPayment() throws PaymentFailedException {
+        if (paymentStrategy == null) {
+            throw new PaymentFailedException("Order " + orderId + ": Please choose a payment mode first");
+        }
+        if (total <= 0) {
+            throw new PaymentFailedException("Order " + orderId + ": Cannot process payment for invalid amount (" + total + ")");
+        }
+        try {
             paymentStrategy.pay(total);
-            return true;
-        } else {
-            System.out.println("Please choose a payment mode first");
-            return false;
+        } catch (Exception e) {
+            throw new PaymentFailedException("Order " + orderId + ": Payment processing failed - " + e.getMessage(), e);
         }
     }
 
