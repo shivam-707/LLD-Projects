@@ -5,6 +5,7 @@ import managers.*;
 import strategies.*;
 import factories.*;
 import services.NotificationService;
+import exceptions.*;
 
 public class TomatoApp {
 
@@ -28,13 +29,22 @@ public class TomatoApp {
         restaurant3.addMenuItem(new MenuItem("P3", "Filter Coffee", 30));
 
         RestaurantManager restaurantManager = RestaurantManager.getInstance();
-        restaurantManager.addRestaurant(restaurant1);
-        restaurantManager.addRestaurant(restaurant2);
-        restaurantManager.addRestaurant(restaurant3);
+        try {
+            restaurantManager.addRestaurant(restaurant1);
+            restaurantManager.addRestaurant(restaurant2);
+            restaurantManager.addRestaurant(restaurant3);
+        } catch (InvalidOrderException e) {
+            System.out.println("Failed to initialize restaurants: " + e.getMessage());
+        }
     }
 
     public List<Restaurant> searchRestaurants(String location) {
-        return RestaurantManager.getInstance().searchByLocation(location);
+        try {
+            return RestaurantManager.getInstance().searchByLocation(location);
+        } catch (RestaurantNotFoundException e) {
+            System.out.println("Search failed: " + e.getMessage());
+            return new java.util.ArrayList<>();
+        }
     }
 
     public void selectRestaurant(User user, Restaurant restaurant) {
@@ -72,17 +82,23 @@ public class TomatoApp {
         List<MenuItem> itemsOrdered = userCart.getItems();
         double totalCost = userCart.getTotalCost();
 
-        Order order = orderFactory.createOrder(user, userCart, orderedRestaurant, itemsOrdered, paymentStrategy, totalCost, orderType);
-        OrderManager.getInstance().addOrder(order);
-        return order;
+        try {
+            Order order = orderFactory.createOrder(user, userCart, orderedRestaurant, itemsOrdered, paymentStrategy, totalCost, orderType);
+            OrderManager.getInstance().addOrder(order);
+            return order;
+        } catch (InvalidOrderException e) {
+            System.out.println("Cannot create order: " + e.getMessage());
+            return null;
+        }
     }
 
     public void payForOrder(User user, Order order) {
-        boolean isPaymentSuccess = order.processPayment();
-
-        if (isPaymentSuccess) {
+        try {
+            order.processPayment();
             NotificationService.notify(order);
             user.getCart().clear();
+        } catch (PaymentFailedException e) {
+            System.out.println("Payment failed: " + e.getMessage());
         }
     }
 

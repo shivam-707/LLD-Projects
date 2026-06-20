@@ -1,3 +1,5 @@
+package test;
+
 import factories.*;
 import models.*;
 import strategies.*;
@@ -8,7 +10,7 @@ public class OrderFactoryTest {
         try {
             // Prepare data
             User user = new User(1, "Alice", "123 Main St");
-            Restaurant r = new Restaurant(1, "Tasty", "Downtown");
+            Restaurant r = new Restaurant("Tasty", "Downtown");
             List<MenuItem> items = Arrays.asList(new MenuItem("m1", "Pizza", 250), new MenuItem("m2", "Soda", 50));
             PaymentStrategy ps = new UpiPaymentStrategy("9999999999");
 
