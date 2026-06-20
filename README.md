@@ -36,6 +36,19 @@ OrderManager: Handles order operations
 RestaurantManager: Manages restaurant data
 PaymentStrategy: Interface for payment processing
 
+## Testing
+### Unit Tests
+- **OrderFactoryTest**: Validates factory pattern for NOW and SCHEDULED orders
+- **OrderManagerTest**: Tests order manager add/clear/count operations  
+- **ExceptionHandlingTest**: Comprehensive exception validation with 4 test cases
+### Run Tests
+```bash
+javac -d out $(find . -name "*.java")
+java -cp out OrderFactoryTest
+java -cp out OrderManagerTest
+java -cp out ExceptionHandlingTest
+```
+
 ## Requirements
 Java 8 or higher
 
