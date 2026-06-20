@@ -6,7 +6,7 @@
 Tomato is a low-level design implementation of a food delivery application. It demonstrates core design patterns and principles for building a scalable order management system with support for both immediate and scheduled deliveries.
 
 ## Summary
-This repository implements a modular food ordering system that supports delivery and pickup workflows, multiple payment strategies, and order tracking through manager classes. Recent changes added logging for service operations and lightweight test helpers for order management.
+This repository implements a modular food ordering system that supports delivery and pickup workflows, multiple payment strategies, and order tracking through manager classes. Recent changes added logging for service operations, lightweight test helpers, and production-grade exception handling with custom exception classes for validation and error management.
 
 ## Features
 - **Multiple Order Types**: Support for instant (NOW) and scheduled delivery orders
