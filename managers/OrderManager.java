@@ -3,7 +3,9 @@ package managers;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 import models.*;
+import exceptions.*;
 
 public class OrderManager {
     private List<Order> orders = new ArrayList<>();
@@ -21,12 +23,14 @@ public class OrderManager {
         return instance;
     }
 
-    public void addOrder(Order order) {
+    public void addOrder(Order order) throws InvalidOrderException {
+        if (order == null) {
+            throw new InvalidOrderException("Cannot add null order");
+        }
+        order.validateOrder();
         orders.add(order);
-        if (order != null && order.getUser() != null) {
+        if (order.getUser() != null) {
             logger.info("Added order id=" + order.getOrderId() + " user=" + order.getUser().getName() + " total=" + order.getTotal());
-        } else {
-            logger.info("Added order (null details)");
         }
     }
 
