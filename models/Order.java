@@ -14,6 +14,7 @@ public abstract class Order {
     protected PaymentStrategy paymentStrategy;
     protected double total;
     protected String scheduled;
+    protected OrderStatus status;
 
     public Order() {
         this.user = null;
@@ -21,6 +22,7 @@ public abstract class Order {
         this.paymentStrategy = null;
         this.total = 0.0;
         this.scheduled = "";
+        this.status = OrderStatus.PENDING;
         this.orderId = ++nextOrderId;
     }
 
@@ -113,6 +115,14 @@ public abstract class Order {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus newStatus) {
+        this.status = newStatus;
     }
 }
 
