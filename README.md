@@ -22,12 +22,24 @@ This repository implements a modular food ordering system that supports delivery
 - **Strategy Pattern**: Payment strategy implementations
 - **Manager Pattern**: Business logic orchestration
 
-- ## Error Handling & Validation
+## Error Handling & Validation
 The system now includes robust exception handling with custom exceptions:
 - **InvalidOrderException**: Thrown when order validation fails (null user, missing items, invalid total, missing payment strategy)
 - **PaymentFailedException**: Thrown when payment processing fails
 - **RestaurantNotFoundException**: Thrown when restaurant search returns no results
+
 All core operations validate inputs and throw appropriate exceptions with descriptive error messages for better debugging and production monitoring.
+
+## Order Status Tracking
+Orders now support a complete lifecycle with status tracking:
+- **PENDING**: Order placed, awaiting confirmation
+- **CONFIRMED**: Order confirmed by restaurant
+- **PREPARING**: Restaurant is preparing the order
+- **OUT_FOR_DELIVERY**: Order is out for delivery
+- **DELIVERED**: Order delivered successfully
+- **CANCELLED**: Order was cancelled
+
+The `OrderManager` provides methods for transitioning orders through these states, with automatic notifications at each step.
 
 ## Key Classes
 Order: Abstract base for all order types

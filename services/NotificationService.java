@@ -37,5 +37,21 @@ public class NotificationService {
         System.out.println("Payment: Done");
         System.out.println("---------------------------------------------");
     }
+
+    public static void notifyStatusChange(Order order) {
+        if (order == null) {
+            logger.warning("Attempted to notify status change for null order");
+            return;
+        }
+
+        OrderStatus status = order.getStatus();
+        logger.info("Notifying status change: order id=" + order.getOrderId() + " status=" + status);
+
+        System.out.println("\n*** Order Status Update ***");
+        System.out.println("Order ID: " + order.getOrderId());
+        System.out.println("Customer: " + order.getUser().getName());
+        System.out.println("Status: " + status + " - " + status.getDescription());
+        System.out.println("*****************************\n");
+    }
 }
 

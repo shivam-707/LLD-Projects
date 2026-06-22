@@ -50,6 +50,60 @@ public class OrderManager {
         return orders.size();
     }
 
+    public Order getOrderById(int orderId) {
+        for (Order order : orders) {
+            if (order.getOrderId() == orderId) {
+                return order;
+            }
+        }
+        return null;
+    }
+
+    public void confirmOrder(int orderId) throws InvalidOrderException {
+        Order order = getOrderById(orderId);
+        if (order == null) {
+            throw new InvalidOrderException("Order not found: " + orderId);
+        }
+        order.setStatus(OrderStatus.CONFIRMED);
+        logger.info("Order " + orderId + " status changed to CONFIRMED");
+    }
+
+    public void markPreparing(int orderId) throws InvalidOrderException {
+        Order order = getOrderById(orderId);
+        if (order == null) {
+            throw new InvalidOrderException("Order not found: " + orderId);
+        }
+        order.setStatus(OrderStatus.PREPARING);
+        logger.info("Order " + orderId + " status changed to PREPARING");
+    }
+
+    public void markOutForDelivery(int orderId) throws InvalidOrderException {
+        Order order = getOrderById(orderId);
+        if (order == null) {
+            throw new InvalidOrderException("Order not found: " + orderId);
+        }
+        order.setStatus(OrderStatus.OUT_FOR_DELIVERY);
+        logger.info("Order " + orderId + " status changed to OUT_FOR_DELIVERY");
+    }
+
+    public void markDelivered(int orderId) throws InvalidOrderException {
+        Order order = getOrderById(orderId);
+        if (order == null) {
+            throw new InvalidOrderException("Order not found: " + orderId);
+        }
+        order.setStatus(OrderStatus.DELIVERED);
+        logger.info("Order " + orderId + " status changed to DELIVERED");
+    }
+
+    public void cancelOrder(int orderId) throws InvalidOrderException {
+        Order order = getOrderById(orderId);
+        if (order == null) {
+            throw new InvalidOrderException("Order not found: " + orderId);
+        }
+        order.setStatus(OrderStatus.CANCELLED);
+        logger.warning("Order " + orderId + " has been CANCELLED");
+    }
+
     public void clearOrders() {
         orders.clear();
     }
