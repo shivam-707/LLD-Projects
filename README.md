@@ -30,14 +30,7 @@ The system now includes robust exception handling with custom exceptions:
 
 All core operations validate inputs and throw appropriate exceptions with descriptive error messages for better debugging and production monitoring.
 
-## Order Status Tracking
-Orders now support a complete lifecycle with status tracking:
-- **PENDING**: Order placed, awaiting confirmation
-- **CONFIRMED**: Order confirmed by restaurant
-- **PREPARING**: Restaurant is preparing the order
-- **OUT_FOR_DELIVERY**: Order is out for delivery
-- **DELIVERED**: Order delivered successfully
-- **CANCELLED**: Order was cancelled
+
 
 The `OrderManager` provides methods for transitioning orders through these states, with automatic notifications at each step.
 
