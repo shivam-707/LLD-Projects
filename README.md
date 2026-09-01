@@ -63,7 +63,6 @@ java -cp out ExceptionHandlingTest
 
 ## Requirements
 - Java 8 or higher
-- No external dependencies (uses java.util.logging)
 
 ## Learning Outcomes
 This project demonstrates:
